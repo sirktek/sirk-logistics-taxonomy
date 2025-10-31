@@ -1,0 +1,161 @@
+# Logistics Taxonomy Base Schema in RDF-S (Turtle format)
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix qb4st: <http://purl.org/qb4st/> .
+@prefix logistics: <http://taxonomy.sirktek.no/logistics#> .
+
+# ===================================================================
+# Location Class Definition
+# ===================================================================
+
+logistics:Location a rdfs:Class ;
+    rdfs:label "Location"@en, "Lokasjon"@no ;
+    rdfs:comment "A physical location in the logistics network"@en .
+
+# ===================================================================
+# Location Type Enumeration (as individual instances)
+# ===================================================================
+
+logistics:LocationType a rdfs:Class ;
+    rdfs:label "Location Type"@en, "Lokasjonstype"@no ;
+    rdfs:comment "Enumeration of location types in the logistics hierarchy"@en .
+
+# Location Type Instances
+logistics:Site a logistics:LocationType ;
+    rdfs:label "Site"@en, "Område"@no ;
+    rdfs:comment "A site or campus containing multiple properties"@en .
+
+logistics:Property a logistics:LocationType ;
+    rdfs:label "Property"@en, "Eiendom"@no ;
+    rdfs:comment "A property or land parcel"@en .
+
+logistics:Complex a logistics:LocationType ;
+    rdfs:label "Complex"@en, "Kompleks"@no ;
+    rdfs:comment "A complex of buildings"@en .
+
+logistics:Zone a logistics:LocationType ;
+    rdfs:label "Zone"@en, "Sone"@no ;
+    rdfs:comment "A designated zone within a facility"@en .
+
+logistics:Building a logistics:LocationType ;
+    rdfs:label "Building"@en, "Bygning"@no ;
+    rdfs:comment "A building structure"@en .
+
+logistics:Entrance a logistics:LocationType ;
+    rdfs:label "Entrance"@en, "Inngang"@no ;
+    rdfs:comment "An entrance to a building or area"@en .
+
+logistics:Section a logistics:LocationType ;
+    rdfs:label "Section"@en, "Seksjon"@no ;
+    rdfs:comment "A section within a building or floor"@en .
+
+logistics:Floor a logistics:LocationType ;
+    rdfs:label "Floor"@en, "Etasje"@no ;
+    rdfs:comment "A floor level in a building"@en .
+
+logistics:Room a logistics:LocationType ;
+    rdfs:label "Room"@en, "Rom"@no ;
+    rdfs:comment "A room or enclosed space"@en .
+
+logistics:Rack a logistics:LocationType ;
+    rdfs:label "Rack"@en, "Stativ"@no ;
+    rdfs:comment "A storage rack structure"@en .
+
+logistics:Aisle a logistics:LocationType ;
+    rdfs:label "Aisle"@en, "Gang"@no ;
+    rdfs:comment "An aisle or corridor for access"@en .
+
+logistics:Row a logistics:LocationType ;
+    rdfs:label "Row"@en, "Rad"@no ;
+    rdfs:comment "A row of storage units"@en .
+
+logistics:Shelf a logistics:LocationType ;
+    rdfs:label "Shelf"@en, "Hylle"@no ;
+    rdfs:comment "A shelf level within a rack"@en .
+
+logistics:Bin a logistics:LocationType ;
+    rdfs:label "Bin"@en, "Binge"@no ;
+    rdfs:comment "A storage bin or container"@en .
+
+# ===================================================================
+# Property Definitions for Location
+# ===================================================================
+
+logistics:name a rdf:Property ;
+    rdfs:label "Name"@en, "Navn"@no ;
+    rdfs:comment "The name of the location"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range xsd:string .
+
+logistics:description a rdf:Property ;
+    rdfs:label "Description"@en, "Beskrivelse"@no ;
+    rdfs:comment "A description of the location"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range xsd:string .
+
+logistics:address a rdf:Property ;
+    rdfs:label "Address"@en, "Adresse"@no ;
+    rdfs:comment "The physical address of the location"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range xsd:string .
+
+logistics:position a rdf:Property ;
+    rdfs:label "Position"@en, "Posisjon"@no ;
+    rdfs:comment "The geographic position of the location"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range geo:Point .
+
+logistics:type a rdf:Property ;
+    rdfs:label "Type"@en, "Type"@no ;
+    rdfs:comment "The type of location from the location type enumeration"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range logistics:LocationType .
+
+# ===================================================================
+# Spatial Properties (for geo:Point with CRS support)
+# ===================================================================
+
+logistics:lat a qb4st:SpatialDimension ;
+    rdfs:subPropertyOf geo:lat ;
+    rdfs:label "Latitude"@en, "Breddegrad"@no ;
+    rdfs:comment "Latitude coordinate in WGS84 coordinate reference system"@en ;
+    qb4st:crs <http://epsg.io/4326> ;
+    qb4st:crslabel "WGS84" .
+
+logistics:long a qb4st:SpatialDimension ;
+    rdfs:subPropertyOf geo:long ;
+    rdfs:label "Longitude"@en, "Lengdegrad"@no ;
+    rdfs:comment "Longitude coordinate in WGS84 coordinate reference system"@en ;
+    qb4st:crs <http://epsg.io/4326> ;
+    qb4st:crslabel "WGS84" .
+
+# ===================================================================
+# Example Usage (commented out)
+# ===================================================================
+
+# logistics:ExampleWarehouse a logistics:Location ;
+#     logistics:name "Main Warehouse" ;
+#     logistics:description "Primary distribution warehouse" ;
+#     logistics:address "123 Industrial Parkway, Oslo, Norway" ;
+#     logistics:type logistics:Building ;
+#     logistics:position [
+#         a geo:Point ;
+#         qb4st:crs <http://epsg.io/4326> ;
+#         geo:lat "59.9139" ;
+#         geo:long "10.7522"
+#     ] .
+#
+# # Alternative with sub-properties
+# logistics:ExampleWarehouse2 a logistics:Location ;
+#     logistics:name "Secondary Warehouse" ;
+#     logistics:description "Backup storage facility" ;
+#     logistics:address "456 Storage Road, Bergen, Norway" ;
+#     logistics:type logistics:Building ;
+#     logistics:position [
+#         a geo:Point ;
+#         logistics:lat "60.3913" ;
+#         logistics:long "5.3221"
+#     ] .
