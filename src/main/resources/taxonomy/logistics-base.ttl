@@ -24,59 +24,73 @@ logistics:LocationType a rdfs:Class ;
     rdfs:comment "Enumeration of location types in the logistics hierarchy"@en .
 
 # Location Type Instances
-logistics:Site a logistics:LocationType ;
+logistics:Site a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Site"@en, "Område"@no ;
     rdfs:comment "A site or campus containing multiple properties"@en .
 
-logistics:Property a logistics:LocationType ;
+logistics:Property a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Property"@en, "Eiendom"@no ;
     rdfs:comment "A property or land parcel"@en .
 
-logistics:Complex a logistics:LocationType ;
+logistics:Complex a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Complex"@en, "Kompleks"@no ;
     rdfs:comment "A complex of buildings"@en .
 
-logistics:Zone a logistics:LocationType ;
+logistics:Zone a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Zone"@en, "Sone"@no ;
     rdfs:comment "A designated zone within a facility"@en .
 
-logistics:Building a logistics:LocationType ;
+logistics:Building a rdfs:Class ;
+rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Building"@en, "Bygning"@no ;
     rdfs:comment "A building structure"@en .
 
-logistics:Entrance a logistics:LocationType ;
+logistics:Entrance a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Entrance"@en, "Inngang"@no ;
     rdfs:comment "An entrance to a building or area"@en .
 
-logistics:Section a logistics:LocationType ;
+logistics:Section a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Section"@en, "Seksjon"@no ;
     rdfs:comment "A section within a building or floor"@en .
 
-logistics:Floor a logistics:LocationType ;
+logistics:Floor a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Floor"@en, "Etasje"@no ;
     rdfs:comment "A floor level in a building"@en .
 
-logistics:Room a logistics:LocationType ;
+logistics:Room a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Room"@en, "Rom"@no ;
     rdfs:comment "A room or enclosed space"@en .
 
-logistics:Rack a logistics:LocationType ;
+logistics:Rack a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Rack"@en, "Stativ"@no ;
     rdfs:comment "A storage rack structure"@en .
 
-logistics:Aisle a logistics:LocationType ;
+logistics:Aisle a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Aisle"@en, "Gang"@no ;
     rdfs:comment "An aisle or corridor for access"@en .
 
-logistics:Row a logistics:LocationType ;
+logistics:Row a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Row"@en, "Rad"@no ;
     rdfs:comment "A row of storage units"@en .
 
-logistics:Shelf a logistics:LocationType ;
+logistics:Shelf a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Shelf"@en, "Hylle"@no ;
     rdfs:comment "A shelf level within a rack"@en .
 
-logistics:Bin a logistics:LocationType ;
+logistics:Bin a rdfs:Class ;
+    rdfs:subClassOf logistics:LocationType ;
     rdfs:label "Bin"@en, "Binge"@no ;
     rdfs:comment "A storage bin or container"@en .
 
