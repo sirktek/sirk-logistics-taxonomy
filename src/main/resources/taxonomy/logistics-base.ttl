@@ -1,0 +1,434 @@
+# Logistics Taxonomy Base Schema in RDF-S (Turtle format)
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix qb4st: <http://purl.org/qb4st/> .
+@prefix logistics: <http://taxonomy.sirktek.no/logistics#> .
+
+# ===================================================================
+# Location Class Definition
+# ===================================================================
+
+logistics:Location a rdfs:Class ;
+    rdfs:label "Location"@en, "Lokasjon"@no ;
+    rdfs:comment "A physical location in the logistics network"@en .
+
+# ===================================================================
+# Location Type Enumeration (as individual instances)
+# ===================================================================
+
+logistics:LocationType a rdfs:Class ;
+    rdfs:label "Location Type"@en, "Lokasjonstype"@no ;
+    rdfs:comment "Enumeration of location types in the logistics hierarchy"@en .
+
+# Location Type Instances
+logistics:Site a logistics:LocationType ;
+    rdfs:label "Site"@en, "Område"@no ;
+    rdfs:comment "A site or campus containing multiple properties"@en .
+
+logistics:Property a logistics:LocationType ;
+    rdfs:label "Property"@en, "Eiendom"@no ;
+    rdfs:comment "A property or land parcel"@en .
+
+logistics:Complex a logistics:LocationType ;
+    rdfs:label "Complex"@en, "Kompleks"@no ;
+    rdfs:comment "A complex of buildings"@en .
+
+logistics:Zone a logistics:LocationType ;
+    rdfs:label "Zone"@en, "Sone"@no ;
+    rdfs:comment "A designated zone within a facility"@en .
+
+logistics:Building a logistics:LocationType ;
+    rdfs:label "Building"@en, "Bygning"@no ;
+    rdfs:comment "A building structure"@en .
+
+logistics:Entrance a logistics:LocationType ;
+    rdfs:label "Entrance"@en, "Inngang"@no ;
+    rdfs:comment "An entrance to a building or area"@en .
+
+logistics:Section a logistics:LocationType ;
+    rdfs:label "Section"@en, "Seksjon"@no ;
+    rdfs:comment "A section within a building or floor"@en .
+
+logistics:Floor a logistics:LocationType ;
+    rdfs:label "Floor"@en, "Etasje"@no ;
+    rdfs:comment "A floor level in a building"@en .
+
+logistics:Room a logistics:LocationType ;
+    rdfs:label "Room"@en, "Rom"@no ;
+    rdfs:comment "A room or enclosed space"@en .
+
+logistics:Rack a logistics:LocationType ;
+    rdfs:label "Rack"@en, "Stativ"@no ;
+    rdfs:comment "A storage rack structure"@en .
+
+logistics:Aisle a logistics:LocationType ;
+    rdfs:label "Aisle"@en, "Gang"@no ;
+    rdfs:comment "An aisle or corridor for access"@en .
+
+logistics:Row a logistics:LocationType ;
+    rdfs:label "Row"@en, "Rad"@no ;
+    rdfs:comment "A row of storage units"@en .
+
+logistics:Shelf a logistics:LocationType ;
+    rdfs:label "Shelf"@en, "Hylle"@no ;
+    rdfs:comment "A shelf level within a rack"@en .
+
+logistics:Bin a logistics:LocationType ;
+    rdfs:label "Bin"@en, "Binge"@no ;
+    rdfs:comment "A storage bin or container"@en .
+
+# ===================================================================
+# Property Definitions for Location
+# ===================================================================
+
+logistics:name a rdf:Property ;
+    rdfs:label "Name"@en, "Navn"@no ;
+    rdfs:comment "The name of the location"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range xsd:string .
+
+logistics:description a rdf:Property ;
+    rdfs:label "Description"@en, "Beskrivelse"@no ;
+    rdfs:comment "A description of the location"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range xsd:string .
+
+logistics:address a rdf:Property ;
+    rdfs:label "Address"@en, "Adresse"@no ;
+    rdfs:comment "The physical address of the location"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range xsd:string .
+
+logistics:position a rdf:Property ;
+    rdfs:label "Position"@en, "Posisjon"@no ;
+    rdfs:comment "The geographic position of the location"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range geo:Point .
+
+logistics:type a rdf:Property ;
+    rdfs:label "Type"@en, "Type"@no ;
+    rdfs:comment "The type of location from the location type enumeration"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range logistics:LocationType .
+
+# ===================================================================
+# Spatial Properties (for geo:Point with CRS support)
+# ===================================================================
+
+logistics:lat a qb4st:SpatialDimension ;
+    rdfs:subPropertyOf geo:lat ;
+    rdfs:label "Latitude"@en, "Breddegrad"@no ;
+    rdfs:comment "Latitude coordinate in WGS84 coordinate reference system"@en ;
+    qb4st:crs <http://epsg.io/4326> ;
+    qb4st:crslabel "WGS84" .
+
+logistics:long a qb4st:SpatialDimension ;
+    rdfs:subPropertyOf geo:long ;
+    rdfs:label "Longitude"@en, "Lengdegrad"@no ;
+    rdfs:comment "Longitude coordinate in WGS84 coordinate reference system"@en ;
+    qb4st:crs <http://epsg.io/4326> ;
+    qb4st:crslabel "WGS84" .
+
+# ===================================================================
+# Freight Class Definition
+# ===================================================================
+
+logistics:Freight a rdfs:Class ;
+    rdfs:label "Freight"@en, "Frakt"@no ;
+    rdfs:comment "Cargo or goods being transported in a logistics operation"@en .
+
+# ===================================================================
+# Freight Type Enumeration
+# ===================================================================
+
+logistics:FreightType a rdfs:Class ;
+    rdfs:label "Freight Type"@en, "Frakttype"@no ;
+    rdfs:comment "Classification of freight by its characteristics and handling requirements"@en .
+
+# Freight Type Instances
+logistics:GeneralCargo a logistics:FreightType ;
+    rdfs:label "General Cargo"@en, "Generell last"@no ;
+    rdfs:comment "Standard freight without special handling requirements"@en .
+
+logistics:BulkCargo a logistics:FreightType ;
+    rdfs:label "Bulk Cargo"@en, "Bulklast"@no ;
+    rdfs:comment "Unpacked cargo shipped in large quantities"@en .
+
+logistics:ContainerCargo a logistics:FreightType ;
+    rdfs:label "Container Cargo"@en, "Containerlast"@no ;
+    rdfs:comment "Cargo transported in standardized containers"@en .
+
+logistics:LiquidCargo a logistics:FreightType ;
+    rdfs:label "Liquid Cargo"@en, "Flytende last"@no ;
+    rdfs:comment "Liquid freight requiring tank transport"@en .
+
+logistics:PerishableCargo a logistics:FreightType ;
+    rdfs:label "Perishable Cargo"@en, "Lett bedervelig last"@no ;
+    rdfs:comment "Temperature-sensitive cargo requiring refrigeration"@en .
+
+logistics:HazardousCargo a logistics:FreightType ;
+    rdfs:label "Hazardous Cargo"@en, "Farlig gods"@no ;
+    rdfs:comment "Dangerous goods requiring special safety handling"@en .
+
+# ===================================================================
+# Weight Class Enumeration
+# ===================================================================
+
+logistics:WeightClass a rdfs:Class ;
+    rdfs:label "Weight Class"@en, "Vektklasse"@no ;
+    rdfs:comment "Classification of freight by weight category"@en .
+
+# Weight Class Instances
+logistics:LightFreight a logistics:WeightClass ;
+    rdfs:label "Light Freight"@en, "Lett frakt"@no ;
+    rdfs:comment "Freight under 2 tonnes"@en .
+
+logistics:MediumFreight a logistics:WeightClass ;
+    rdfs:label "Medium Freight"@en, "Middels frakt"@no ;
+    rdfs:comment "Freight between 2-20 tonnes"@en .
+
+logistics:HeavyFreight a logistics:WeightClass ;
+    rdfs:label "Heavy Freight"@en, "Tung frakt"@no ;
+    rdfs:comment "Freight over 20 tonnes"@en .
+
+# ===================================================================
+# Volume Class Enumeration
+# ===================================================================
+
+logistics:VolumeClass a rdfs:Class ;
+    rdfs:label "Volume Class"@en, "Volumklasse"@no ;
+    rdfs:comment "Classification of freight by volume category"@en .
+
+# Volume Class Instances
+logistics:ParcelVolume a logistics:VolumeClass ;
+    rdfs:label "Parcel Volume"@en, "Pakkevolum"@no ;
+    rdfs:comment "Small package volume under 1 cubic meter"@en .
+
+logistics:PalletVolume a logistics:VolumeClass ;
+    rdfs:label "Pallet Volume"@en, "Pallevolum"@no ;
+    rdfs:comment "Standard pallet volume 1-10 cubic meters"@en .
+
+logistics:ContainerVolume a logistics:VolumeClass ;
+    rdfs:label "Container Volume"@en, "Containervolum"@no ;
+    rdfs:comment "Full container load volume over 10 cubic meters"@en .
+
+# ===================================================================
+# Property Definitions for Freight
+# ===================================================================
+
+logistics:weight a rdf:Property ;
+    rdfs:label "Weight"@en, "Vekt"@no ;
+    rdfs:comment "The weight of the freight in kilograms"@en ;
+    rdfs:domain logistics:Freight ;
+    rdfs:range xsd:decimal .
+
+logistics:volume a rdf:Property ;
+    rdfs:label "Volume"@en, "Volum"@no ;
+    rdfs:comment "The volume of the freight in cubic meters"@en ;
+    rdfs:domain logistics:Freight ;
+    rdfs:range xsd:decimal .
+
+logistics:cargoType a rdf:Property ;
+    rdfs:label "Cargo Type"@en, "Lasttype"@no ;
+    rdfs:comment "The type of cargo from the freight type enumeration"@en ;
+    rdfs:domain logistics:Freight ;
+    rdfs:range logistics:FreightType .
+
+# ===================================================================
+# Transport Mode Enumeration
+# ===================================================================
+
+logistics:TransportMode a rdfs:Class ;
+    rdfs:label "Transport Mode"@en, "Transportmodus"@no ;
+    rdfs:comment "Mode of transport for moving freight"@en .
+
+# Transport Mode Instances
+logistics:RoadTransport a logistics:TransportMode ;
+    rdfs:label "Road Transport"@en, "Veitransport"@no ;
+    rdfs:comment "Transport by road vehicle (truck, van)"@en .
+
+logistics:SeaTransport a logistics:TransportMode ;
+    rdfs:label "Sea Transport"@en, "Sjøtransport"@no ;
+    rdfs:comment "Transport by sea vessel (ship, barge)"@en .
+
+logistics:AirTransport a logistics:TransportMode ;
+    rdfs:label "Air Transport"@en, "Flytransport"@no ;
+    rdfs:comment "Transport by aircraft (plane, cargo jet)"@en .
+
+logistics:RailTransport a logistics:TransportMode ;
+    rdfs:label "Rail Transport"@en, "Togtransport"@no ;
+    rdfs:comment "Transport by rail (train, freight rail)"@en .
+
+logistics:InlandWaterwayTransport a logistics:TransportMode ;
+    rdfs:label "Inland Waterway Transport"@en, "Innlandsvannveistransport"@no ;
+    rdfs:comment "Transport by inland waterway (river, canal)"@en .
+
+# ===================================================================
+# Transport Activity Classes
+# ===================================================================
+
+logistics:TransportActivity a rdfs:Class ;
+    rdfs:label "Transport Activity"@en, "Transportaktivitet"@no ;
+    rdfs:comment "An activity involving the movement of freight"@en .
+
+logistics:TransportChain a rdfs:Class ;
+    rdfs:label "Transport Chain"@en, "Transportkjede"@no ;
+    rdfs:comment "A sequence of transport activities forming an end-to-end journey"@en .
+
+logistics:TransportChainElement a rdfs:Class ;
+    rdfs:label "Transport Chain Element"@en, "Transportkjedeelement"@no ;
+    rdfs:comment "An individual element (activity or hub) in a transport chain"@en .
+
+logistics:TransportLeg a rdfs:Class ;
+    rdfs:label "Transport Leg"@en, "Transportetappe"@no ;
+    rdfs:comment "A single leg or segment of a multi-modal journey"@en .
+
+# ===================================================================
+# Hub Activity Class and Enumeration
+# ===================================================================
+
+logistics:HubActivity a rdfs:Class ;
+    rdfs:label "Hub Activity"@en, "Navaktivitet"@no ;
+    rdfs:comment "An activity performed at a logistics hub or terminal"@en .
+
+# Hub Activity Instances
+logistics:Transshipment a logistics:HubActivity ;
+    rdfs:label "Transshipment"@en, "Omlasting"@no ;
+    rdfs:comment "Transfer of cargo between transport modes or vehicles"@en .
+
+logistics:Storage a logistics:HubActivity ;
+    rdfs:label "Storage"@en, "Lagring"@no ;
+    rdfs:comment "Temporary storage of cargo at a facility"@en .
+
+logistics:Loading a logistics:HubActivity ;
+    rdfs:label "Loading"@en, "Lasting"@no ;
+    rdfs:comment "Loading cargo onto a transport vehicle"@en .
+
+logistics:Unloading a logistics:HubActivity ;
+    rdfs:label "Unloading"@en, "Lossing"@no ;
+    rdfs:comment "Unloading cargo from a transport vehicle"@en .
+
+logistics:Handling a logistics:HubActivity ;
+    rdfs:label "Handling"@en, "Håndtering"@no ;
+    rdfs:comment "Physical handling and movement of cargo within a facility"@en .
+
+# ===================================================================
+# Vehicle Type Enumeration
+# ===================================================================
+
+logistics:VehicleType a rdfs:Class ;
+    rdfs:label "Vehicle Type"@en, "Kjøretøytype"@no ;
+    rdfs:comment "Classification of road transport vehicles by size and capacity"@en .
+
+# Vehicle Type Instances
+logistics:LightDutyVehicle a logistics:VehicleType ;
+    rdfs:label "Light Duty Vehicle"@en, "Lett kjøretøy"@no ;
+    rdfs:comment "Light commercial vehicle under 3.5 tonnes GVW"@en .
+
+logistics:MediumDutyTruck a logistics:VehicleType ;
+    rdfs:label "Medium Duty Truck"@en, "Middels lastebil"@no ;
+    rdfs:comment "Medium truck 3.5-12 tonnes GVW"@en .
+
+logistics:HeavyDutyTruck a logistics:VehicleType ;
+    rdfs:label "Heavy Duty Truck"@en, "Tung lastebil"@no ;
+    rdfs:comment "Heavy rigid truck 12-32 tonnes GVW"@en .
+
+logistics:ArticulatedTruck a logistics:VehicleType ;
+    rdfs:label "Articulated Truck"@en, "Vogntog"@no ;
+    rdfs:comment "Articulated truck with trailer over 32 tonnes GVW"@en .
+
+# ===================================================================
+# Vessel Type Enumeration
+# ===================================================================
+
+logistics:VesselType a rdfs:Class ;
+    rdfs:label "Vessel Type"@en, "Fartøytype"@no ;
+    rdfs:comment "Classification of sea transport vessels by cargo type and capacity"@en .
+
+# Vessel Type Instances
+logistics:ContainerShip a logistics:VesselType ;
+    rdfs:label "Container Ship"@en, "Containerskip"@no ;
+    rdfs:comment "Vessel designed to carry standardized containers"@en .
+
+logistics:BulkCarrier a logistics:VesselType ;
+    rdfs:label "Bulk Carrier"@en, "Bulkskip"@no ;
+    rdfs:comment "Vessel designed to transport bulk cargo"@en .
+
+logistics:Tanker a logistics:VesselType ;
+    rdfs:label "Tanker"@en, "Tankskip"@no ;
+    rdfs:comment "Vessel designed to transport liquid cargo in tanks"@en .
+
+logistics:RoRoVessel a logistics:VesselType ;
+    rdfs:label "RoRo Vessel"@en, "RoRo-skip"@no ;
+    rdfs:comment "Roll-on/roll-off vessel for wheeled cargo"@en .
+
+# ===================================================================
+# Property Definitions for Transport
+# ===================================================================
+
+logistics:origin a rdf:Property ;
+    rdfs:label "Origin"@en, "Opprinnelse"@no ;
+    rdfs:comment "The starting location of a transport activity"@en ;
+    rdfs:domain logistics:TransportActivity ;
+    rdfs:range logistics:Location .
+
+logistics:destination a rdf:Property ;
+    rdfs:label "Destination"@en, "Destinasjon"@no ;
+    rdfs:comment "The ending location of a transport activity"@en ;
+    rdfs:domain logistics:TransportActivity ;
+    rdfs:range logistics:Location .
+
+logistics:freight a rdf:Property ;
+    rdfs:label "Freight"@en, "Frakt"@no ;
+    rdfs:comment "The freight being transported in this activity"@en ;
+    rdfs:domain logistics:TransportActivity ;
+    rdfs:range logistics:Freight .
+
+logistics:transportMode a rdf:Property ;
+    rdfs:label "Transport Mode"@en, "Transportmodus"@no ;
+    rdfs:comment "The mode of transport used for this activity"@en ;
+    rdfs:domain logistics:TransportActivity ;
+    rdfs:range logistics:TransportMode .
+
+logistics:distance a rdf:Property ;
+    rdfs:label "Distance"@en, "Distanse"@no ;
+    rdfs:comment "The distance covered in kilometers"@en ;
+    rdfs:domain logistics:TransportActivity ;
+    rdfs:range xsd:decimal .
+
+logistics:duration a rdf:Property ;
+    rdfs:label "Duration"@en, "Varighet"@no ;
+    rdfs:comment "The duration of the transport activity in hours"@en ;
+    rdfs:domain logistics:TransportActivity ;
+    rdfs:range xsd:decimal .
+
+# ===================================================================
+# Example Usage (commented out)
+# ===================================================================
+
+# logistics:ExampleWarehouse a logistics:Location ;
+#     logistics:name "Main Warehouse" ;
+#     logistics:description "Primary distribution warehouse" ;
+#     logistics:address "123 Industrial Parkway, Oslo, Norway" ;
+#     logistics:type logistics:Building ;
+#     logistics:position [
+#         a geo:Point ;
+#         qb4st:crs <http://epsg.io/4326> ;
+#         geo:lat "59.9139" ;
+#         geo:long "10.7522"
+#     ] .
+#
+# # Alternative with sub-properties
+# logistics:ExampleWarehouse2 a logistics:Location ;
+#     logistics:name "Secondary Warehouse" ;
+#     logistics:description "Backup storage facility" ;
+#     logistics:address "456 Storage Road, Bergen, Norway" ;
+#     logistics:type logistics:Building ;
+#     logistics:position [
+#         a geo:Point ;
+#         logistics:lat "60.3913" ;
+#         logistics:long "5.3221"
+#     ] .
