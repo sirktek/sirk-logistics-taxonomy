@@ -20,9 +20,7 @@ public class LogisticsPropertyDefinition {
 
         return switch (rangeType) {
             case "http://www.w3.org/2001/XMLSchema#string" -> {
-                if (name != null) {
-                    if (name.equals("address")) yield PropertyType.ADDRESS;
-                }
+                if ("address".equals(name)) yield PropertyType.ADDRESS;
                 yield PropertyType.STRING;
             }
             case "http://www.w3.org/2001/XMLSchema#decimal" -> PropertyType.DECIMAL;
