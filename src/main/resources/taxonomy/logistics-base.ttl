@@ -84,17 +84,6 @@ logistics:Bin a logistics:LocationType ;
 # Property Definitions for Location
 # ===================================================================
 
-logistics:name a rdf:Property ;
-    rdfs:label "Name"@en, "Navn"@no ;
-    rdfs:comment "The name of the location"@en ;
-    rdfs:domain logistics:Location ;
-    rdfs:range xsd:string .
-
-logistics:description a rdf:Property ;
-    rdfs:label "Description"@en, "Beskrivelse"@no ;
-    rdfs:comment "A description of the location"@en ;
-    rdfs:domain logistics:Location ;
-    rdfs:range xsd:string .
 
 logistics:address a rdf:Property ;
     rdfs:label "Address"@en, "Adresse"@no ;
