@@ -93,7 +93,7 @@ class PropertyDefinitionTest {
         // Test that all enum values are defined for logistics
         PropertyType[] allTypes = PropertyType.values();
 
-        assertEquals(9, allTypes.length);
+        assertEquals(10, allTypes.length);
 
         // Check specific enum values exist
         assertNotNull(PropertyType.valueOf("STRING"));
@@ -105,5 +105,6 @@ class PropertyDefinitionTest {
         assertNotNull(PropertyType.valueOf("ADDRESS"));
         assertNotNull(PropertyType.valueOf("GEO_POINT"));
         assertNotNull(PropertyType.valueOf("LOCATION_TYPE"));
+        assertNotNull(PropertyType.valueOf("ENERGY_MIX"));
     }
 }

@@ -19,6 +19,7 @@ public class LogisticsPropertyDefinition {
         }
 
         return switch (rangeType) {
+            case "http://taxonomy.sirktek.no/logistics#EnergySourceEntry" -> PropertyType.ENERGY_MIX;
             case "http://www.w3.org/2001/XMLSchema#string" -> {
                 if ("address".equals(name)) yield PropertyType.ADDRESS;
                 yield PropertyType.STRING;
@@ -62,6 +63,8 @@ public class LogisticsPropertyDefinition {
         /** Geographic point property type */
         GEO_POINT,
         /** Location type enumeration property type */
-        LOCATION_TYPE
+        LOCATION_TYPE,
+        /** Energy mix property type */
+        ENERGY_MIX
     }
 }
