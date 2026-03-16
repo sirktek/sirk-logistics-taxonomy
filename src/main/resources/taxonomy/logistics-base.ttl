@@ -110,6 +110,12 @@ logistics:position a rdf:Property ;
     rdfs:domain logistics:Location ;
     rdfs:range geo:Point .
 
+logistics:deliveryAddress a rdf:Property ;
+    rdfs:label "Delivery address"@en, "Adresse varelevering"@no ;
+    rdfs:comment "The physical address of the delivery location (if different)"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range xsd:string .
+
 logistics:type a rdf:Property ;
     rdfs:label "Type"@en, "Type"@no ;
     rdfs:comment "The type of location from the location type enumeration"@en ;
