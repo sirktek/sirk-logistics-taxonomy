@@ -128,6 +128,12 @@ logistics:energyMix a rdf:Property ;
     rdfs:domain logistics:Location ;
     rdfs:range logistics:EnergySourceEntry .
 
+logistics:yearlyProductiveHours a rdf:Property ;
+    rdfs:label "Yearly Productive Hours"@en, "Årlige produktive timer"@no ;
+    rdfs:comment "Number of yearly productive hours at this location, used to attribute EnergyMix emissions per hour of production"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range xsd:integer .
+
 # ===================================================================
 # Spatial Properties (for geo:Point with CRS support)
 # ===================================================================
