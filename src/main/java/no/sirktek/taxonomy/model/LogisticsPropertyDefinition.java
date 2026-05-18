@@ -19,7 +19,8 @@ public class LogisticsPropertyDefinition {
         }
 
         return switch (rangeType) {
-            case "http://taxonomy.sirktek.no/logistics#EnergySourceEntry" -> PropertyType.ENERGY_MIX;
+            // EnergySourceEntry moved to common-taxonomy in v3.0; resolved
+            // by CommonPropertyDefinition instead.
             case "http://www.w3.org/2001/XMLSchema#string" -> {
                 if ("address".equals(name)) yield PropertyType.ADDRESS;
                 yield PropertyType.STRING;
@@ -63,8 +64,8 @@ public class LogisticsPropertyDefinition {
         /** Geographic point property type */
         GEO_POINT,
         /** Location type enumeration property type */
-        LOCATION_TYPE,
-        /** Energy mix property type */
-        ENERGY_MIX
+        LOCATION_TYPE
+        // ENERGY_MIX moved to CommonPropertyDefinition.PropertyType in v3.0
+        // — the range is now common:EnergySourceEntry.
     }
 }

@@ -38,7 +38,7 @@
     </scm>
 
     <properties>
-        <revision>2.0-SNAPSHOT</revision>
+        <revision>3.0-SNAPSHOT</revision>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -50,11 +50,12 @@
     </properties>
 
     <dependencies>
-        <!-- Sirktek Taxonomy Commons -->
+        <!-- Sirktek Taxonomy Commons (v3.x ships EnergySourceEntry referenced
+             by logistics:energyMix below). -->
         <dependency>
             <groupId>no.sirktek</groupId>
             <artifactId>taxonomy-commons</artifactId>
-            <version>2.5</version>
+            <version>3.6</version>
         </dependency>
 
         <!-- Lombok for reducing boilerplate -->

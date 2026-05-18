@@ -90,10 +90,10 @@ class PropertyDefinitionTest {
 
     @Test
     void shouldTestAllPropertyTypeEnumValues() {
-        // Test that all enum values are defined for logistics
+        // v3.0: ENERGY_MIX moved to CommonPropertyDefinition.PropertyType.
         PropertyType[] allTypes = PropertyType.values();
 
-        assertEquals(10, allTypes.length);
+        assertEquals(9, allTypes.length);
 
         // Check specific enum values exist
         assertNotNull(PropertyType.valueOf("STRING"));
@@ -105,6 +105,5 @@ class PropertyDefinitionTest {
         assertNotNull(PropertyType.valueOf("ADDRESS"));
         assertNotNull(PropertyType.valueOf("GEO_POINT"));
         assertNotNull(PropertyType.valueOf("LOCATION_TYPE"));
-        assertNotNull(PropertyType.valueOf("ENERGY_MIX"));
     }
 }
