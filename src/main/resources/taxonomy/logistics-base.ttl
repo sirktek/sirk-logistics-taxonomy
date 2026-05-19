@@ -134,6 +134,12 @@ logistics:yearlyProductiveHours a rdf:Property ;
     rdfs:domain logistics:Location ;
     rdfs:range xsd:integer .
 
+logistics:yearlyEmission a rdf:Property ;
+    rdfs:label "Yearly Emission"@en, "Årlig utslipp"@no ;
+    rdfs:comment "Per-LCA-module yearly CO2e emissions for this location"@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range common:EmissionEntry .
+
 # ===================================================================
 # Spatial Properties (for geo:Point with CRS support)
 # ===================================================================

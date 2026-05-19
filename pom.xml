@@ -55,7 +55,7 @@
         <dependency>
             <groupId>no.sirktek</groupId>
             <artifactId>taxonomy-commons</artifactId>
-            <version>3.6</version>
+            <version>3.8</version>
         </dependency>
 
         <!-- Lombok for reducing boilerplate -->
