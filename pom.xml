@@ -55,7 +55,7 @@
         <dependency>
             <groupId>no.sirktek</groupId>
             <artifactId>taxonomy-commons</artifactId>
-            <version>3.8</version>
+            <version>3.10</version>
         </dependency>
 
         <!-- Lombok for reducing boilerplate -->
@@ -110,7 +110,31 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages — sirk-taxonomy-commons</name>
+            <url>https://maven.pkg.github.com/sirktek/sirk-taxonomy-commons</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <profiles>
+        <profile>
+            <id>github-packages</id>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub Packages</name>
+                    <url>https://maven.pkg.github.com/sirktek/sirk-logistics-taxonomy</url>
+                </repository>
+            </distributionManagement>
+        </profile>
         <profile>
             <id>deployment</id>
             <build>
