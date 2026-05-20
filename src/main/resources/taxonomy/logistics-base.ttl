@@ -140,6 +140,12 @@ logistics:yearlyEmission a rdf:Property ;
     rdfs:domain logistics:Location ;
     rdfs:range common:EmissionEntry .
 
+logistics:allocations a rdf:Property ;
+    rdfs:label "Allocations"@en, "Allokering"@no ;
+    rdfs:comment "Allocation buckets partitioning this location's yearly emissions across capacity dimensions (e.g. storage volume, workstation count). Processes claim slices of a single bucket via LOCATION_ALLOCATION flows."@en ;
+    rdfs:domain logistics:Location ;
+    rdfs:range common:AllocationEntry .
+
 # ===================================================================
 # Spatial Properties (for geo:Point with CRS support)
 # ===================================================================
