@@ -165,6 +165,72 @@ logistics:long a qb4st:SpatialDimension ;
     qb4st:crslabel "WGS84" .
 
 # ===================================================================
+# Real Estate Class Definition
+# ===================================================================
+
+logistics:RealEstate a rdfs:Class ;
+    rdfs:label "Real Estate"@en, "Fast eiendom"@no ;
+    rdfs:comment "A legal real estate property registered in the cadastre, optionally linked to one or more physical locations"@en .
+
+# ===================================================================
+# Property Definitions for RealEstate
+# ===================================================================
+
+logistics:propertyId a rdf:Property ;
+    rdfs:label "Property ID"@en, "Matrikkelnummer"@no ;
+    rdfs:comment "The Norwegian cadastral identifier (matrikkelnummer), typically formatted as municipality-gnr-bnr (e.g. 0301-100-200)"@en ;
+    rdfs:domain logistics:RealEstate ;
+    rdfs:range xsd:string .
+
+logistics:marketValue a rdf:Property ;
+    rdfs:label "Market Value"@en, "Markedsverdi"@no ;
+    rdfs:comment "The estimated market value of the real estate property in NOK"@en ;
+    rdfs:domain logistics:RealEstate ;
+    rdfs:range xsd:decimal .
+
+logistics:floorArea a rdf:Property ;
+    rdfs:label "Floor Area"@en, "Bruksareal"@no ;
+    rdfs:comment "The usable floor area (BRA) of the real estate in square meters"@en ;
+    rdfs:domain logistics:RealEstate ;
+    rdfs:range xsd:decimal .
+
+logistics:landArea a rdf:Property ;
+    rdfs:label "Land Area"@en, "Tomteareal"@no ;
+    rdfs:comment "The land parcel area (tomteareal) of the real estate in square meters"@en ;
+    rdfs:domain logistics:RealEstate ;
+    rdfs:range xsd:decimal .
+
+logistics:builtYear a rdf:Property ;
+    rdfs:label "Built Year"@en, "Byggeår"@no ;
+    rdfs:comment "The year the main structure on the real estate was built"@en ;
+    rdfs:domain logistics:RealEstate ;
+    rdfs:range xsd:gYear .
+
+# ===================================================================
+# Control Point Class Definition
+# ===================================================================
+
+logistics:ControlPoint a rdfs:Class ;
+    rdfs:label "Control Point"@en, "Kontrollpunkt"@no ;
+    rdfs:comment "An asset category for points to be visited and checked during physical control rounds (e.g. safety, security, or inspection rounds). The asset's QR code marks the physical point, and the asset's location/position is used for the map"@en .
+
+# ===================================================================
+# Property Definitions for ControlPoint
+# ===================================================================
+
+logistics:controlDescription a rdf:Property ;
+    rdfs:label "Description"@en, "Beskrivelse"@no ;
+    rdfs:comment "Inspection instructions describing what should be checked at this control point"@en ;
+    rdfs:domain logistics:ControlPoint ;
+    rdfs:range xsd:string .
+
+logistics:controlInterval a rdf:Property ;
+    rdfs:label "Control Interval"@en, "Kontrollintervall"@no ;
+    rdfs:comment "The interval in days at which this control point should be checked"@en ;
+    rdfs:domain logistics:ControlPoint ;
+    rdfs:range xsd:integer .
+
+# ===================================================================
 # Freight Class Definition
 # ===================================================================
 
