@@ -207,6 +207,16 @@ logistics:builtYear a rdf:Property ;
     rdfs:range xsd:gYear .
 
 # ===================================================================
+# Cross-cutting property domain extensions
+#
+# Opt logistics:RealEstate into common cross-cutting properties by
+# extending their domain with an additional schema:domainIncludes triple.
+# The property and its range marker live in common-taxonomy.
+# ===================================================================
+
+common:assetValue schema:domainIncludes logistics:RealEstate .
+
+# ===================================================================
 # Control Point Class Definition
 # ===================================================================
 
