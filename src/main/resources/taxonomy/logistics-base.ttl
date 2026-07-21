@@ -188,12 +188,6 @@ logistics:marketValue a rdf:Property ;
     rdfs:domain logistics:RealEstate ;
     rdfs:range xsd:decimal .
 
-logistics:floorArea a rdf:Property ;
-    rdfs:label "Floor Area"@en, "Bruksareal"@no ;
-    rdfs:comment "The usable floor area (BRA) of the real estate in square meters"@en ;
-    rdfs:domain logistics:RealEstate ;
-    rdfs:range xsd:decimal .
-
 logistics:landArea a rdf:Property ;
     rdfs:label "Land Area"@en, "Tomteareal"@no ;
     rdfs:comment "The land parcel area (tomteareal) of the real estate in square meters"@en ;
@@ -205,6 +199,20 @@ logistics:builtYear a rdf:Property ;
     rdfs:comment "The year the main structure on the real estate was built"@en ;
     rdfs:domain logistics:RealEstate ;
     rdfs:range xsd:gYear .
+
+# ===================================================================
+# Properties shared by RealEstate and Location
+#
+# schema:domainIncludes gives union semantics — the property applies to
+# either class. (Repeating rdfs:domain would mean intersection instead.)
+# ===================================================================
+
+logistics:floorArea a rdf:Property ;
+    rdfs:label "Floor Area"@en, "Bruksareal"@no ;
+    rdfs:comment "The usable floor area (BRA) in square meters. On a RealEstate this is the total for the property; on a Location it is the area of that specific location, such as a building, floor or room"@en ;
+    schema:domainIncludes logistics:RealEstate ;
+    schema:domainIncludes logistics:Location ;
+    rdfs:range xsd:decimal .
 
 # ===================================================================
 # Cross-cutting property domain extensions

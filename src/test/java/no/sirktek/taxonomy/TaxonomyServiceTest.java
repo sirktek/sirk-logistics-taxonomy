@@ -97,4 +97,23 @@ class TaxonomyServiceTest {
         assertFalse(taxonomyService.isBaseTaxonomyClass("NonExistent"));
     }
 
+    @Test
+    void shouldExposeFloorAreaOnBothRealEstateAndLocation() {
+        assertTrue(hasProperty("RealEstate", "floorArea"));
+        assertTrue(hasProperty("Location", "floorArea"));
+    }
+
+    @Test
+    void shouldKeepRealEstateOnlyPropertiesOffLocation() {
+        assertTrue(hasProperty("RealEstate", "landArea"));
+        assertFalse(hasProperty("Location", "landArea"));
+    }
+
+    private boolean hasProperty(String className, String propertyName) {
+        return taxonomyService.getCategoryByClassName(className)
+                .orElseThrow(() -> new AssertionError("No such class: " + className))
+                .properties().stream()
+                .anyMatch(p -> propertyName.equals(p.name()));
+    }
+
 }
