@@ -38,7 +38,7 @@ jobs:
         server-password: GITHUB_TOKEN
 
     - name: Test with Maven
-      run: ./mvnw clean -U test -Drevision=1.${{github.run_number}}
+      run: ./mvnw clean -U test -Drevision=3.${{github.run_number}}
       env:
         GITHUB_ACTOR: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
