@@ -2,6 +2,8 @@ package no.sirktek.taxonomy;
 
 import no.sirktek.taxonomy.LogisticsTaxonomyService;
 import no.sirktek.taxonomy.model.CategoryInfo;
+import no.sirktek.taxonomy.model.LogisticsPropertyDefinition;
+import no.sirktek.taxonomy.model.PropertyDefinition;
 import no.sirktek.taxonomy.model.TaxonomyTree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -114,6 +116,25 @@ class TaxonomyServiceTest {
                 .orElseThrow(() -> new AssertionError("No such class: " + className))
                 .properties().stream()
                 .anyMatch(p -> propertyName.equals(p.name()));
+    }
+
+    @Test
+    void shouldExposeControlChecklistOnControlPointNextToDescriptionAndInterval() {
+        CategoryInfo controlPoint = taxonomyService.getCategoryByClassName("ControlPoint")
+                .orElseThrow(() -> new AssertionError("No such class: ControlPoint"));
+
+        assertTrue(hasProperty("ControlPoint", "controlDescription"));
+        assertTrue(hasProperty("ControlPoint", "controlInterval"));
+
+        PropertyDefinition controlChecklist = controlPoint.properties().stream()
+                .filter(p -> "controlChecklist".equals(p.name()))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("No controlChecklist property on ControlPoint"));
+
+        assertEquals(LogisticsPropertyDefinition.PropertyType.STRING,
+                LogisticsPropertyDefinition.getPropertyType(controlChecklist));
+        assertEquals("Checklist", controlChecklist.englishLabel());
+        assertEquals("Sjekkliste", controlChecklist.norwegianLabel());
     }
 
 }

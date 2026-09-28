@@ -238,7 +238,7 @@ logistics:ControlPoint a rdfs:Class ;
 
 logistics:controlDescription a rdf:Property ;
     rdfs:label "Description"@en, "Beskrivelse"@no ;
-    rdfs:comment "Inspection instructions describing what should be checked at this control point"@en ;
+    rdfs:comment "Point-level instructions: where the control point is and how to reach it. The individual checks and their guidance live in controlChecklist"@en ;
     rdfs:domain logistics:ControlPoint ;
     rdfs:range xsd:string .
 
@@ -247,6 +247,12 @@ logistics:controlInterval a rdf:Property ;
     rdfs:comment "The interval in days at which this control point should be checked"@en ;
     rdfs:domain logistics:ControlPoint ;
     rdfs:range xsd:integer .
+
+logistics:controlChecklist a rdf:Property ;
+    rdfs:label "Checklist"@en, "Sjekkliste"@no ;
+    rdfs:comment "The checks to perform at this control point on each visit: a JSON-encoded ChecklistTemplate v1 (the cross-repo checklists contract). Set on a ControlPoint category it is the default for every point in that category; set on an asset it replaces the category default"@en ;
+    rdfs:domain logistics:ControlPoint ;
+    rdfs:range xsd:string .
 
 # ===================================================================
 # Rental Object Class Definition
