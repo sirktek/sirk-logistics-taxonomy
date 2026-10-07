@@ -222,7 +222,21 @@ logistics:floorArea a rdf:Property ;
 # The property and its range marker live in common-taxonomy.
 # ===================================================================
 
-common:assetValue schema:domainIncludes logistics:RealEstate .
+# wealthTaxValue (formuesverdi) is stored only for real estate: it follows
+# Skatteetaten's own valuation rules (calculated rental value for
+# næringseiendom, formuesgrunnlag for other property) and cannot be derived
+# from bookValue or taxValue. For other asset types it equals taxValue.
+common:wealthTaxValue schema:domainIncludes logistics:RealEstate .
+
+# Accounting and tax properties (ledger account, per-year book value and
+# tax value, tax depreciation group). Typical group for real estate is h (buildings
+# and installations); i for office buildings, j for fixed technical
+# installations. Land is not depreciable. The actual group is chosen per
+# category/asset by the consumer.
+common:ledgerAccount schema:domainIncludes logistics:RealEstate .
+common:bookValue schema:domainIncludes logistics:RealEstate .
+common:taxValue schema:domainIncludes logistics:RealEstate .
+common:depreciationGroup schema:domainIncludes logistics:RealEstate .
 
 # ===================================================================
 # Control Point Class Definition
