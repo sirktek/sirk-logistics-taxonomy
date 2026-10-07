@@ -255,21 +255,21 @@ logistics:controlChecklist a rdf:Property ;
     rdfs:range xsd:string .
 
 # ===================================================================
-# Rental Object Class Definition
+# Operated Property Class Definition
 # ===================================================================
 
-logistics:RentalObject a rdfs:Class ;
-    rdfs:label "Rental Object"@en, "Utleieobjekt"@no ;
+logistics:OperatedProperty a rdfs:Class ;
+    rdfs:label "Operated Property"@en, "Driftsobjekt"@no ;
     rdfs:comment "An operational unit registered by the organization responsible for daily operations (drift) of a property it does not own. It is anchored to the property's location, so control rounds and deviations attach to it, while the legal property remains a RealEstate in the owning organization"@en .
 
 # ===================================================================
-# Property Definitions for RentalObject
+# Property Definitions for OperatedProperty
 # ===================================================================
 
 logistics:managedPropertyId a rdf:Property ;
     rdfs:label "Managed Property ID"@en, "Matrikkelnummer (forvaltet eiendom)"@no ;
-    rdfs:comment "The Norwegian cadastral identifier (matrikkelnummer) of the property this rental object operates, typically formatted as municipality-gnr-bnr (e.g. 0301-100-200)"@en ;
-    rdfs:domain logistics:RentalObject ;
+    rdfs:comment "The Norwegian cadastral identifier (matrikkelnummer) of the property this operated property represents, typically formatted as municipality-gnr-bnr (e.g. 0301-100-200)"@en ;
+    rdfs:domain logistics:OperatedProperty ;
     rdfs:range xsd:string .
 
 # ===================================================================
