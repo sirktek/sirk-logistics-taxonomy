@@ -87,6 +87,24 @@ logistics:ExampleWarehouse a logistics:Location ;
     ] .
 ```
 
+### Accounting and Tax Properties
+
+`logistics:RealEstate` (Eiendom) opts into the cross-cutting accounting properties defined in
+`taxonomy-commons` via `schema:domainIncludes`:
+
+| Property | Label (no) | Range |
+|---|---|---|
+| `common:ledgerAccount` | Regnskapskonto | `xsd:string` |
+| `common:bookValue` | Bokført verdi | `common:AssetValueEntry` (year, value) |
+| `common:taxValue` | Skattemessig verdi | `common:AssetValueEntry` (year, value) |
+| `common:wealthTaxValue` | Formuesverdi | `common:AssetValueEntry` (year, value), jurisdiction `NO` |
+| `common:depreciationGroup` | Saldogruppe | `common:DepreciationGroup` enumeration (values tagged per jurisdiction) |
+
+Real estate is the only domain that carries `wealthTaxValue`, because the formuesverdi of a
+property is set by its own valuation rules; for driftsmidler it is derived from the tax value.
+The definitions, the `DepreciationGroupA`–`J` values and the jurisdiction tagging are documented
+in the `taxonomy-commons` README. `CommonPropertyOptInTest` pins the opt-ins.
+
 ## RDF-S Schema
 
 The taxonomy is defined using RDF-S in Turtle format with:
