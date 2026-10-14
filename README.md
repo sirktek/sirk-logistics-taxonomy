@@ -87,23 +87,25 @@ logistics:ExampleWarehouse a logistics:Location ;
     ] .
 ```
 
-### Accounting and Tax Properties
+### Accounting and commercial properties
 
-`logistics:RealEstate` (Eiendom) opts into the cross-cutting accounting properties defined in
-`taxonomy-commons` via `schema:domainIncludes`:
+`logistics:RealEstate` (Eiendom) and `logistics:OperatedProperty` (Driftsobjekt) opt into the
+cross-cutting properties defined in `taxonomy-commons` via `schema:domainIncludes`; the commons
+loader merges them into the logistics classes (taxonomy-commons 3.14+).
 
-| Property | Label (no) | Range |
-|---|---|---|
-| `common:ledgerAccount` | Regnskapskonto | `xsd:string` |
-| `common:bookValue` | Bokført verdi | `common:AssetValueEntry` (year, value) |
-| `common:taxValue` | Skattemessig verdi | `common:AssetValueEntry` (year, value) |
-| `common:wealthTaxValue` | Formuesverdi | `common:AssetValueEntry` (year, value), jurisdiction `NO` |
-| `common:depreciationGroup` | Saldogruppe | `common:DepreciationGroup` enumeration (values tagged per jurisdiction) |
+| Property | Label (no) | Classes | Private set |
+|---|---|---|---|
+| `common:ledgerAccount` | Regnskapskonto | RealEstate | `accounting` |
+| `common:depreciationGroup` | Saldogruppe | RealEstate | `accounting` |
+| `common:valuations` | Verdier | RealEstate | `accounting` |
+| `common:marketValue` | Markedsverdi | RealEstate, OperatedProperty | `commercial` |
+| `common:marketValueDate` | Markedsverdi per dato | RealEstate, OperatedProperty | `commercial` |
+| `common:monthlyRent` | Månedsleie | RealEstate, OperatedProperty | `commercial` |
+| `common:monthlyServiceCharge` | Månedlig felleskostnad | RealEstate, OperatedProperty | `commercial` |
 
-Real estate is the only domain that carries `wealthTaxValue`, because the formuesverdi of a
-property is set by its own valuation rules; for driftsmidler it is derived from the tax value.
-The definitions, the `DepreciationGroupA`–`J` values and the jurisdiction tagging are documented
-in the `taxonomy-commons` README. `CommonPropertyOptInTest` pins the opt-ins.
+`valuations` is a list of `{year, bookValue, taxValue, wealthValue}` per fiscal year (ledger17
+shape). The definitions and the `DepreciationGroupA`–`J` values are documented in the
+`taxonomy-commons` README. `CommonPropertyOptInTest` pins the opt-ins.
 
 ## RDF-S Schema
 
@@ -143,3 +145,10 @@ This library is part of the Sirktek taxonomy suite:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Releases
+
+Every merge to `main` tags `3.<run number>` and publishes it to GitHub Packages. Maven Central
+(monthly publishing limit) is manual: run "Publish release to Maven Central" with the tag when a
+Central consumer needs that version. Publish the taxonomy-commons version this release depends on
+to Central first.
