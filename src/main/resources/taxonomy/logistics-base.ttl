@@ -182,12 +182,6 @@ logistics:propertyId a rdf:Property ;
     rdfs:domain logistics:RealEstate ;
     rdfs:range xsd:string .
 
-logistics:marketValue a rdf:Property ;
-    rdfs:label "Market Value"@en, "Markedsverdi"@no ;
-    rdfs:comment "The estimated market value of the real estate property in NOK"@en ;
-    rdfs:domain logistics:RealEstate ;
-    rdfs:range xsd:decimal .
-
 logistics:landArea a rdf:Property ;
     rdfs:label "Land Area"@en, "Tomteareal"@no ;
     rdfs:comment "The land parcel area (tomteareal) of the real estate in square meters"@en ;
@@ -217,26 +211,27 @@ logistics:floorArea a rdf:Property ;
 # ===================================================================
 # Cross-cutting property domain extensions
 #
-# Opt logistics:RealEstate into common cross-cutting properties by
+# Opt logistics classes into common cross-cutting properties by
 # extending their domain with an additional schema:domainIncludes triple.
-# The property and its range marker live in common-taxonomy.
+# The property and its range marker live in taxonomy-commons; the commons
+# loader merges them into the logistics classes at load time.
 # ===================================================================
 
-# wealthTaxValue (formuesverdi) is stored only for real estate: it follows
-# Skatteetaten's own valuation rules (calculated rental value for
-# næringseiendom, formuesgrunnlag for other property) and cannot be derived
-# from bookValue or taxValue. For other asset types it equals taxValue.
-common:wealthTaxValue schema:domainIncludes logistics:RealEstate .
-
-# Accounting and tax properties (ledger account, per-year book value and
-# tax value, tax depreciation group). Typical group for real estate is h (buildings
-# and installations); i for office buildings, j for fixed technical
-# installations. Land is not depreciable. The actual group is chosen per
-# category/asset by the consumer.
+# Accounting (privateSet "accounting", ledger17 names): ledger account,
+# tax depreciation group and the yearly valuations (book value, tax value,
+# wealth value per fiscal year). Typical group for real estate is h
+# (buildings and installations); i for office buildings, j for fixed
+# technical installations. Land is not depreciable. The actual group is
+# chosen per category/asset by the consumer.
 common:ledgerAccount schema:domainIncludes logistics:RealEstate .
-common:bookValue schema:domainIncludes logistics:RealEstate .
-common:taxValue schema:domainIncludes logistics:RealEstate .
 common:depreciationGroup schema:domainIncludes logistics:RealEstate .
+common:valuations schema:domainIncludes logistics:RealEstate .
+
+# Commercial terms (privateSet "commercial").
+common:marketValue schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
+common:marketValueDate schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
+common:monthlyRent schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
+common:monthlyServiceCharge schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
 
 # ===================================================================
 # Control Point Class Definition
