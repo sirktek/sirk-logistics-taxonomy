@@ -2,6 +2,7 @@ package no.sirktek.taxonomy;
 
 import no.sirktek.taxonomy.LogisticsTaxonomyService;
 import no.sirktek.taxonomy.model.CategoryInfo;
+import no.sirktek.taxonomy.model.CommonPropertyDefinition;
 import no.sirktek.taxonomy.model.LogisticsPropertyDefinition;
 import no.sirktek.taxonomy.model.PropertyDefinition;
 import no.sirktek.taxonomy.model.TaxonomyTree;
@@ -131,8 +132,10 @@ class TaxonomyServiceTest {
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("No controlChecklist property on ControlPoint"));
 
-        assertEquals(LogisticsPropertyDefinition.PropertyType.STRING,
-                LogisticsPropertyDefinition.getPropertyType(controlChecklist));
+        assertEquals("http://taxonomy.sirktek.no/common#controlChecklist", controlChecklist.uri());
+        assertEquals("http://taxonomy.sirktek.no/common#ChecklistTemplateEntry", controlChecklist.rangeType());
+        assertEquals(CommonPropertyDefinition.PropertyType.CHECKLIST,
+                CommonPropertyDefinition.getPropertyType(controlChecklist));
         assertEquals("Checklist", controlChecklist.englishLabel());
         assertEquals("Sjekkliste", controlChecklist.norwegianLabel());
     }

@@ -11,11 +11,12 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import no.sirktek.taxonomy.model.CommonPropertyDefinition;
 
 /**
  * Verifies that the logistics taxonomy opts its classes into the shared commons
  * properties. The {@code schema:domainIncludes} opt-ins are honoured by the commons
- * loader (taxonomy-commons 3.14+), so this checks what consumers see: the properties
+ * loader (taxonomy-commons 3.19+), so this checks what consumers see: the properties
  * of {@code RealEstate} and {@code OperatedProperty} loaded through
  * {@link LogisticsTaxonomyService}, with their private set.
  */
@@ -83,5 +84,36 @@ class CommonPropertyOptInTest {
         assertEquals(expected.size(), props.size(), "property names must not repeat");
         props.stream().filter(p -> COMMERCIAL.contains(p.name()))
                 .forEach(p -> assertEquals("commercial", p.privateSet(), p.name()));
+    }
+
+    @Test
+    void freightCarriesWeightAndVolumeOnceFromCommons() {
+        List<PropertyDefinition> props = properties("Freight");
+        for (String[] e : new String[][] {
+                {"weight", "Weight (kg)", "Vekt (kg)"}, {"volume", "Volume (m\u00b3)", "Volum (m\u00b3)"}}) {
+            List<PropertyDefinition> found = props.stream().filter(p -> e[0].equals(p.name())).toList();
+            assertEquals(1, found.size(), e[0]);
+            assertEquals(COMMON + e[0], found.get(0).uri());
+            assertEquals(e[1], found.get(0).englishLabel());
+            assertEquals(e[2], found.get(0).norwegianLabel());
+        }
+    }
+
+    @Test
+    void locationAddressStaysInLogistics() {
+        assertEquals("http://taxonomy.sirktek.no/logistics#address", byName("Location").get("address").uri());
+    }
+
+    @Test
+    void controlPointCarriesCommonControlChecklistOnce() {
+        List<PropertyDefinition> found = properties("ControlPoint").stream()
+                .filter(p -> "controlChecklist".equals(p.name())).toList();
+        assertEquals(1, found.size());
+        PropertyDefinition p = found.get(0);
+        assertEquals(COMMON + "controlChecklist", p.uri());
+        assertEquals(COMMON + "ChecklistTemplateEntry", p.rangeType());
+        assertEquals("Checklist", p.englishLabel());
+        assertEquals("Sjekkliste", p.norwegianLabel());
+        assertEquals(CommonPropertyDefinition.PropertyType.CHECKLIST, CommonPropertyDefinition.getPropertyType(p));
     }
 }
