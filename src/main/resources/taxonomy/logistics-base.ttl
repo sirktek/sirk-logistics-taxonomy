@@ -233,6 +233,11 @@ common:marketValueDate schema:domainIncludes logistics:RealEstate, logistics:Ope
 common:monthlyRent schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
 common:monthlyServiceCharge schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
 
+# Shared physical and checklist terms.
+common:weight schema:domainIncludes logistics:Freight .
+common:volume schema:domainIncludes logistics:Freight .
+common:controlChecklist schema:domainIncludes logistics:ControlPoint .
+
 # ===================================================================
 # Control Point Class Definition
 # ===================================================================
@@ -256,12 +261,6 @@ logistics:controlInterval a rdf:Property ;
     rdfs:comment "The interval in days at which this control point should be checked"@en ;
     rdfs:domain logistics:ControlPoint ;
     rdfs:range xsd:integer .
-
-logistics:controlChecklist a rdf:Property ;
-    rdfs:label "Checklist"@en, "Sjekkliste"@no ;
-    rdfs:comment "The checks to perform at this control point on each visit: a JSON-encoded ChecklistTemplate v1 (the cross-repo checklists contract). Set on a ControlPoint category it is the default for every point in that category; set on an asset it replaces the category default"@en ;
-    rdfs:domain logistics:ControlPoint ;
-    rdfs:range xsd:string .
 
 # ===================================================================
 # Operated Property Class Definition
@@ -367,18 +366,6 @@ logistics:ContainerVolume a logistics:VolumeClass ;
 # ===================================================================
 # Property Definitions for Freight
 # ===================================================================
-
-logistics:weight a rdf:Property ;
-    rdfs:label "Weight"@en, "Vekt"@no ;
-    rdfs:comment "The weight of the freight in kilograms"@en ;
-    rdfs:domain logistics:Freight ;
-    rdfs:range xsd:decimal .
-
-logistics:volume a rdf:Property ;
-    rdfs:label "Volume"@en, "Volum"@no ;
-    rdfs:comment "The volume of the freight in cubic meters"@en ;
-    rdfs:domain logistics:Freight ;
-    rdfs:range xsd:decimal .
 
 logistics:cargoType a rdf:Property ;
     rdfs:label "Cargo Type"@en, "Lasttype"@no ;

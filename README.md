@@ -87,11 +87,12 @@ logistics:ExampleWarehouse a logistics:Location ;
     ] .
 ```
 
-### Accounting and commercial properties
+### Shared properties (accounting, commercial, weight, volume, checklist)
 
-`logistics:RealEstate` (Eiendom) and `logistics:OperatedProperty` (Driftsobjekt) opt into the
+`logistics:RealEstate` (Eiendom), `logistics:OperatedProperty` (Driftsobjekt), `logistics:Freight` (`weight`, `volume`) and
+`logistics:ControlPoint` (`controlChecklist`) opt into the
 cross-cutting properties defined in `taxonomy-commons` via `schema:domainIncludes`; the commons
-loader merges them into the logistics classes (taxonomy-commons 3.14+).
+loader merges them into the logistics classes (taxonomy-commons 3.19+).
 
 | Property | Label (no) | Classes | Private set |
 |---|---|---|---|
@@ -102,6 +103,9 @@ loader merges them into the logistics classes (taxonomy-commons 3.14+).
 | `common:marketValueDate` | Markedsverdi per dato | RealEstate, OperatedProperty | `commercial` |
 | `common:monthlyRent` | Månedsleie | RealEstate, OperatedProperty | `commercial` |
 | `common:monthlyServiceCharge` | Månedlig felleskostnad | RealEstate, OperatedProperty | `commercial` |
+| `common:weight` | Vekt (kg) | Freight | |
+| `common:volume` | Volum (m³) | Freight | |
+| `common:controlChecklist` | Sjekkliste | ControlPoint | |
 
 `valuations` is a list of `{year, bookValue, taxValue, wealthValue}` per fiscal year (ledger17
 shape). The definitions and the `DepreciationGroupA`–`J` values are documented in the

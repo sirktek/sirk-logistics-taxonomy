@@ -1,3 +1,5 @@
+Superseded by sirk-taxonomy-commons consolidate-shared-properties (Group 4).
+
 # Proposal — checklists (logistics-taxonomy slice)
 
 ## Why
