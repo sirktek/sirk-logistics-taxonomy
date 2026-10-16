@@ -67,6 +67,10 @@ The logistics taxonomy defines:
   - Site, Property, Complex, Zone, Building, Entrance
   - Section, Floor, Room, Rack, Aisle, Row, Shelf, Bin
 
+- **PropertyOperations** ("Eiendom og drift"): root grouping the property-management categories
+  - Subclasses: RealEstate (Fast eiendom), OperatedProperty (Driftsobjekt), ControlPoint (Kontrollpunkt)
+  - Carries no properties of its own
+
 ### Geo-spatial Support
 
 The taxonomy integrates W3C standards for geographic coordinates:

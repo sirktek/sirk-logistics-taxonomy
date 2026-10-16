@@ -165,10 +165,24 @@ logistics:long a qb4st:SpatialDimension ;
     qb4st:crslabel "WGS84" .
 
 # ===================================================================
+# Property & Operations Root Class
+#
+# Groups the property-management categories (RealEstate,
+# OperatedProperty, ControlPoint) under one root so frontends show them
+# together. It carries no properties of its own; selecting it means a
+# generic property-management asset.
+# ===================================================================
+
+logistics:PropertyOperations a rdfs:Class ;
+    rdfs:label "Property & Operations"@en, "Eiendom og drift"@no ;
+    rdfs:comment "Root class grouping real estate, operated properties and control points"@en .
+
+# ===================================================================
 # Real Estate Class Definition
 # ===================================================================
 
 logistics:RealEstate a rdfs:Class ;
+    rdfs:subClassOf logistics:PropertyOperations ;
     rdfs:label "Real Estate"@en, "Fast eiendom"@no ;
     rdfs:comment "A legal real estate property registered in the cadastre, optionally linked to one or more physical locations"@en .
 
@@ -243,6 +257,7 @@ common:controlChecklist schema:domainIncludes logistics:ControlPoint .
 # ===================================================================
 
 logistics:ControlPoint a rdfs:Class ;
+    rdfs:subClassOf logistics:PropertyOperations ;
     rdfs:label "Control Point"@en, "Kontrollpunkt"@no ;
     rdfs:comment "An asset category for points to be visited and checked during physical control rounds (e.g. safety, security, or inspection rounds). The asset's QR code marks the physical point, and the asset's location/position is used for the map"@en .
 
@@ -267,6 +282,7 @@ logistics:controlInterval a rdf:Property ;
 # ===================================================================
 
 logistics:OperatedProperty a rdfs:Class ;
+    rdfs:subClassOf logistics:PropertyOperations ;
     rdfs:label "Operated Property"@en, "Driftsobjekt"@no ;
     rdfs:comment "An operational unit registered by the organization responsible for daily operations (drift) of a property it does not own. It is anchored to the property's location, so control rounds and deviations attach to it, while the legal property remains a RealEstate in the owning organization"@en .
 
