@@ -112,6 +112,20 @@ class TaxonomyServiceTest {
         assertFalse(hasProperty("Location", "landArea"));
     }
 
+    @Test
+    void shouldGroupPropertyManagementClassesUnderPropertyOperationsRoot() {
+        CategoryInfo root = taxonomyService.getCategoryByClassName("PropertyOperations")
+                .orElseThrow(() -> new AssertionError("No such class: PropertyOperations"));
+        assertTrue(root.isRoot());
+        assertEquals("Property & Operations", root.englishName());
+
+        for (String child : new String[] {"RealEstate", "OperatedProperty", "ControlPoint"}) {
+            CategoryInfo category = taxonomyService.getCategoryByClassName(child)
+                    .orElseThrow(() -> new AssertionError("No such class: " + child));
+            assertEquals("PropertyOperations", category.parentClassName(), child);
+        }
+    }
+
     private boolean hasProperty(String className, String propertyName) {
         return taxonomyService.getCategoryByClassName(className)
                 .orElseThrow(() -> new AssertionError("No such class: " + className))
