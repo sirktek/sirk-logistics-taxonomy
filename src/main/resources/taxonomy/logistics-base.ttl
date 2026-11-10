@@ -202,12 +202,6 @@ logistics:landArea a rdf:Property ;
     rdfs:domain logistics:RealEstate ;
     rdfs:range xsd:decimal .
 
-logistics:builtYear a rdf:Property ;
-    rdfs:label "Built Year"@en, "Byggeår"@no ;
-    rdfs:comment "The year the main structure on the real estate was built"@en ;
-    rdfs:domain logistics:RealEstate ;
-    rdfs:range xsd:gYear .
-
 # ===================================================================
 # Properties shared by RealEstate and Location
 #
@@ -244,8 +238,13 @@ common:valuations schema:domainIncludes logistics:RealEstate .
 # Commercial terms (privateSet "commercial").
 common:marketValue schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
 common:marketValueDate schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
-common:monthlyRent schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
-common:monthlyServiceCharge schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
+common:monthlyRentExVAT schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
+common:monthlyServiceChargeExVAT schema:domainIncludes logistics:RealEstate, logistics:OperatedProperty .
+
+# Age of the real estate (year built, year of installation). Replaces the
+# logistics-local builtYear (xsd:gYear); the commons terms are xsd:integer.
+common:yearOfManufacture schema:domainIncludes logistics:RealEstate .
+common:installationYear schema:domainIncludes logistics:RealEstate .
 
 # Shared physical and checklist terms.
 common:weight schema:domainIncludes logistics:Freight .

@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import no.sirktek.taxonomy.model.CommonPropertyDefinition;
 
@@ -25,8 +26,9 @@ class CommonPropertyOptInTest {
     private static final String COMMON = "http://taxonomy.sirktek.no/common#";
     private static final Set<String> ACCOUNTING = Set.of("ledgerAccount", "depreciationGroup", "valuations");
     private static final Set<String> COMMERCIAL =
-            Set.of("marketValue", "marketValueDate", "monthlyRent", "monthlyServiceCharge");
-    private static final Set<String> REAL_ESTATE_OWN = Set.of("propertyId", "landArea", "builtYear", "floorArea");
+            Set.of("marketValue", "marketValueDate", "monthlyRentExVAT", "monthlyServiceChargeExVAT");
+    private static final Set<String> AGE = Set.of("yearOfManufacture", "installationYear");
+    private static final Set<String> REAL_ESTATE_OWN = Set.of("propertyId", "landArea", "floorArea");
 
     private LogisticsTaxonomyService service;
 
@@ -51,6 +53,7 @@ class CommonPropertyOptInTest {
         Set<String> expected = new java.util.HashSet<>(REAL_ESTATE_OWN);
         expected.addAll(ACCOUNTING);
         expected.addAll(COMMERCIAL);
+        expected.addAll(AGE);
 
         assertEquals(expected, props.stream().map(PropertyDefinition::name).collect(Collectors.toSet()));
         assertEquals(expected.size(), props.size(), "property names must not repeat");
@@ -62,6 +65,21 @@ class CommonPropertyOptInTest {
         ACCOUNTING.forEach(n -> assertEquals("accounting", props.get(n).privateSet(), n));
         COMMERCIAL.forEach(n -> assertEquals("commercial", props.get(n).privateSet(), n));
         REAL_ESTATE_OWN.forEach(n -> assertNull(props.get(n).privateSet(), n));
+        AGE.forEach(n -> assertNull(props.get(n).privateSet(), n));
+    }
+
+    @Test
+    void realEstateAgeOptInsAreCommonIntegerProperties() {
+        Map<String, PropertyDefinition> props = byName("RealEstate");
+        for (String n : AGE) {
+            assertEquals(COMMON + n, props.get(n).uri(), n);
+            assertEquals("http://www.w3.org/2001/XMLSchema#integer", props.get(n).rangeType(), n);
+        }
+    }
+
+    @Test
+    void realEstateNoLongerCarriesBuiltYear() {
+        assertFalse(byName("RealEstate").containsKey("builtYear"));
     }
 
     @Test

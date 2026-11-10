@@ -91,7 +91,7 @@ logistics:ExampleWarehouse a logistics:Location ;
     ] .
 ```
 
-### Shared properties (accounting, commercial, weight, volume, checklist)
+### Shared properties (accounting, commercial, age, weight, volume, checklist)
 
 `logistics:RealEstate` (Eiendom), `logistics:OperatedProperty` (Driftsobjekt), `logistics:Freight` (`weight`, `volume`) and
 `logistics:ControlPoint` (`controlChecklist`) opt into the
@@ -105,8 +105,10 @@ loader merges them into the logistics classes (taxonomy-commons 3.19+).
 | `common:valuations` | Verdier | RealEstate | `accounting` |
 | `common:marketValue` | Markedsverdi | RealEstate, OperatedProperty | `commercial` |
 | `common:marketValueDate` | Markedsverdi per dato | RealEstate, OperatedProperty | `commercial` |
-| `common:monthlyRent` | Månedsleie | RealEstate, OperatedProperty | `commercial` |
-| `common:monthlyServiceCharge` | Månedlig felleskostnad | RealEstate, OperatedProperty | `commercial` |
+| `common:monthlyRentExVAT` | Månedsleie (eks. mva) | RealEstate, OperatedProperty | `commercial` |
+| `common:monthlyServiceChargeExVAT` | Felleskostnader per måned (eks. mva) | RealEstate, OperatedProperty | `commercial` |
+| `common:yearOfManufacture` | Produksjonsår | RealEstate | |
+| `common:installationYear` | Installasjonsår | RealEstate | |
 | `common:weight` | Vekt (kg) | Freight | |
 | `common:volume` | Volum (m³) | Freight | |
 | `common:controlChecklist` | Sjekkliste | ControlPoint | |
