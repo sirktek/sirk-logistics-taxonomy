@@ -2,15 +2,17 @@
 
 ## Purpose
 TBD - created by archiving change adopt-shared-commons-properties. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: RealEstate carries the accounting and commercial commons properties
 
 Loaded through `LogisticsTaxonomyService`, `RealEstate` SHALL have exactly the properties
-`propertyId`, `landArea`, `builtYear`, `floorArea`, `ledgerAccount`, `depreciationGroup`,
-`valuations`, `marketValue`, `marketValueDate`, `monthlyRent` and `monthlyServiceCharge`, each
-name once. `ledgerAccount`, `depreciationGroup` and `valuations` SHALL have `privateSet`
-`accounting`; the four commercial terms SHALL have `privateSet` `commercial`; the own properties
-SHALL have no `privateSet`.
+`propertyId`, `landArea`, `floorArea`, `yearOfManufacture`, `installationYear`, `ledgerAccount`,
+`depreciationGroup`, `valuations`, `marketValue`, `marketValueDate`, `monthlyRentExVAT` and
+`monthlyServiceChargeExVAT`, each name once. `ledgerAccount`, `depreciationGroup` and `valuations`
+SHALL have `privateSet` `accounting`; the four commercial terms SHALL have `privateSet`
+`commercial`; the own properties and the two age properties SHALL have no `privateSet`.
 
 #### Scenario: Accounting opt-ins attach with their private set
 - **WHEN** the logistics taxonomy is loaded
@@ -22,7 +24,11 @@ SHALL have no `privateSet`.
 
 #### Scenario: Commercial terms attach with their private set
 - **WHEN** the logistics taxonomy is loaded
-- **THEN** `RealEstate` has `marketValue`, `marketValueDate`, `monthlyRent` and `monthlyServiceCharge`, each with `privateSet` `commercial`
+- **THEN** `RealEstate` has `marketValue`, `marketValueDate`, `monthlyRentExVAT` and `monthlyServiceChargeExVAT`, each with `privateSet` `commercial`, and no `monthlyRent` or `monthlyServiceCharge`
+
+#### Scenario: Age properties come from commons
+- **WHEN** the logistics taxonomy is loaded
+- **THEN** `RealEstate` has `yearOfManufacture` with `uri` `http://taxonomy.sirktek.no/common#yearOfManufacture` and `installationYear` with `uri` `http://taxonomy.sirktek.no/common#installationYear`, both with no `privateSet`, and no property `builtYear`
 
 ### Requirement: marketValue is the commons property
 
@@ -36,12 +42,12 @@ property named `marketValue`, with `uri` `http://taxonomy.sirktek.no/common#mark
 ### Requirement: OperatedProperty carries the commercial terms
 
 Loaded through `LogisticsTaxonomyService`, `OperatedProperty` SHALL have exactly
-`managedPropertyId`, `marketValue`, `marketValueDate`, `monthlyRent` and `monthlyServiceCharge`;
-the four commercial terms SHALL have `privateSet` `commercial`.
+`managedPropertyId`, `marketValue`, `marketValueDate`, `monthlyRentExVAT` and
+`monthlyServiceChargeExVAT`; the four commercial terms SHALL have `privateSet` `commercial`.
 
 #### Scenario: Commercial terms on a driftsobjekt
 - **WHEN** the logistics taxonomy is loaded
-- **THEN** `OperatedProperty` has `managedPropertyId` and the four commercial terms, the latter with `privateSet` `commercial`, and no accounting property
+- **THEN** `OperatedProperty` has `managedPropertyId` and the four commercial terms, the latter with `privateSet` `commercial`, and no accounting or age property
 
 ### Requirement: Maven Central publishing is manual
 
@@ -55,4 +61,3 @@ tag to Maven Central SHALL be a `workflow_dispatch` workflow taking the tag as i
 #### Scenario: Manual Central release
 - **WHEN** a maintainer runs "Publish release to Maven Central" with tag `3.<n>`
 - **THEN** the workflow checks out that tag, sets the version to `3.<n>` and deploys it with the `deployment` profile
-
