@@ -18,7 +18,8 @@
 
 logistics:Location a rdfs:Class ;
     rdfs:label "Location"@en, "Lokasjon"@no ;
-    rdfs:comment "A physical location in the logistics network"@en .
+    rdfs:comment "A physical location in the logistics network"@en ;
+    rdfs:comment "Et fysisk sted i logistikknettverket"@no .
 
 # ===================================================================
 # Location Type Enumeration (as individual instances)
@@ -26,7 +27,8 @@ logistics:Location a rdfs:Class ;
 
 logistics:LocationType a rdfs:Class ;
     rdfs:label "Location Type"@en, "Lokasjonstype"@no ;
-    rdfs:comment "Enumeration of location types in the logistics hierarchy"@en .
+    rdfs:comment "Enumeration of location types in the logistics hierarchy"@en ;
+    rdfs:comment "Oppramsing av lokasjonstyper i logistikkhierarkiet"@no .
 
 # Location Type Instances
 logistics:Site a logistics:LocationType ;
@@ -175,7 +177,8 @@ logistics:long a qb4st:SpatialDimension ;
 
 logistics:PropertyOperations a rdfs:Class ;
     rdfs:label "Property & Operations"@en, "Eiendom og drift"@no ;
-    rdfs:comment "Root class grouping real estate, operated properties and control points"@en .
+    rdfs:comment "Root class grouping real estate, operated properties and control points"@en ;
+    rdfs:comment "Rotklasse som grupperer fast eiendom, driftsobjekter og kontrollpunkter"@no .
 
 # ===================================================================
 # Real Estate Class Definition
@@ -184,7 +187,8 @@ logistics:PropertyOperations a rdfs:Class ;
 logistics:RealEstate a rdfs:Class ;
     rdfs:subClassOf logistics:PropertyOperations ;
     rdfs:label "Real Estate"@en, "Fast eiendom"@no ;
-    rdfs:comment "A legal real estate property registered in the cadastre, optionally linked to one or more physical locations"@en .
+    rdfs:comment "A legal real estate property registered in the cadastre, optionally linked to one or more physical locations"@en ;
+    rdfs:comment "En juridisk eiendom registrert i matrikkelen, eventuelt knyttet til én eller flere fysiske lokasjoner"@no .
 
 # ===================================================================
 # Property Definitions for RealEstate
@@ -258,7 +262,8 @@ common:controlChecklist schema:domainIncludes logistics:ControlPoint .
 logistics:ControlPoint a rdfs:Class ;
     rdfs:subClassOf logistics:PropertyOperations ;
     rdfs:label "Control Point"@en, "Kontrollpunkt"@no ;
-    rdfs:comment "An asset category for points to be visited and checked during physical control rounds (e.g. safety, security, or inspection rounds). The asset's QR code marks the physical point, and the asset's location/position is used for the map"@en .
+    rdfs:comment "An asset category for points to be visited and checked during physical control rounds (e.g. safety, security, or inspection rounds). The asset's QR code marks the physical point, and the asset's location/position is used for the map"@en ;
+    rdfs:comment "En eiendelskategori for punkter som skal besøkes og kontrolleres under fysiske kontrollrunder (f.eks. sikkerhets-, vakt- eller inspeksjonsrunder). Eiendelens QR-kode markerer det fysiske punktet, og eiendelens lokasjon/posisjon brukes i kartet"@no .
 
 # ===================================================================
 # Property Definitions for ControlPoint
@@ -283,7 +288,8 @@ logistics:controlInterval a rdf:Property ;
 logistics:OperatedProperty a rdfs:Class ;
     rdfs:subClassOf logistics:PropertyOperations ;
     rdfs:label "Operated Property"@en, "Driftsobjekt"@no ;
-    rdfs:comment "An operational unit registered by the organization responsible for daily operations (drift) of a property it does not own. It is anchored to the property's location, so control rounds and deviations attach to it, while the legal property remains a RealEstate in the owning organization"@en .
+    rdfs:comment "An operational unit registered by the organization responsible for daily operations (drift) of a property it does not own. It is anchored to the property's location, so control rounds and deviations attach to it, while the legal property remains a RealEstate in the owning organization"@en ;
+    rdfs:comment "En driftsenhet registrert av organisasjonen som har ansvar for den daglige driften av en eiendom den ikke eier. Den er forankret i eiendommens lokasjon, slik at kontrollrunder og avvik knyttes til den, mens den juridiske eiendommen forblir en fast eiendom i den eiende organisasjonen"@no .
 
 # ===================================================================
 # Property Definitions for OperatedProperty
@@ -301,7 +307,8 @@ logistics:managedPropertyId a rdf:Property ;
 
 logistics:Freight a rdfs:Class ;
     rdfs:label "Freight"@en, "Frakt"@no ;
-    rdfs:comment "Cargo or goods being transported in a logistics operation"@en .
+    rdfs:comment "Cargo or goods being transported in a logistics operation"@en ;
+    rdfs:comment "Last eller varer som transporteres i en logistikkoperasjon"@no .
 
 # ===================================================================
 # Freight Type Enumeration
@@ -309,7 +316,8 @@ logistics:Freight a rdfs:Class ;
 
 logistics:FreightType a rdfs:Class ;
     rdfs:label "Freight Type"@en, "Frakttype"@no ;
-    rdfs:comment "Classification of freight by its characteristics and handling requirements"@en .
+    rdfs:comment "Classification of freight by its characteristics and handling requirements"@en ;
+    rdfs:comment "Klassifisering av frakt etter egenskaper og krav til håndtering"@no .
 
 # Freight Type Instances
 logistics:GeneralCargo a logistics:FreightType ;
@@ -342,7 +350,8 @@ logistics:HazardousCargo a logistics:FreightType ;
 
 logistics:WeightClass a rdfs:Class ;
     rdfs:label "Weight Class"@en, "Vektklasse"@no ;
-    rdfs:comment "Classification of freight by weight category"@en .
+    rdfs:comment "Classification of freight by weight category"@en ;
+    rdfs:comment "Klassifisering av frakt etter vektkategori"@no .
 
 # Weight Class Instances
 logistics:LightFreight a logistics:WeightClass ;
@@ -363,7 +372,8 @@ logistics:HeavyFreight a logistics:WeightClass ;
 
 logistics:VolumeClass a rdfs:Class ;
     rdfs:label "Volume Class"@en, "Volumklasse"@no ;
-    rdfs:comment "Classification of freight by volume category"@en .
+    rdfs:comment "Classification of freight by volume category"@en ;
+    rdfs:comment "Klassifisering av frakt etter volumkategori"@no .
 
 # Volume Class Instances
 logistics:ParcelVolume a logistics:VolumeClass ;
@@ -394,7 +404,8 @@ logistics:cargoType a rdf:Property ;
 
 logistics:TransportMode a rdfs:Class ;
     rdfs:label "Transport Mode"@en, "Transportmodus"@no ;
-    rdfs:comment "Mode of transport for moving freight"@en .
+    rdfs:comment "Mode of transport for moving freight"@en ;
+    rdfs:comment "Transportform for flytting av frakt"@no .
 
 # Transport Mode Instances
 logistics:RoadTransport a logistics:TransportMode ;
@@ -423,19 +434,23 @@ logistics:InlandWaterwayTransport a logistics:TransportMode ;
 
 logistics:TransportActivity a rdfs:Class ;
     rdfs:label "Transport Activity"@en, "Transportaktivitet"@no ;
-    rdfs:comment "An activity involving the movement of freight"@en .
+    rdfs:comment "An activity involving the movement of freight"@en ;
+    rdfs:comment "En aktivitet som innebærer flytting av frakt"@no .
 
 logistics:TransportChain a rdfs:Class ;
     rdfs:label "Transport Chain"@en, "Transportkjede"@no ;
-    rdfs:comment "A sequence of transport activities forming an end-to-end journey"@en .
+    rdfs:comment "A sequence of transport activities forming an end-to-end journey"@en ;
+    rdfs:comment "En rekke transportaktiviteter som til sammen utgjør en sammenhengende reise"@no .
 
 logistics:TransportChainElement a rdfs:Class ;
     rdfs:label "Transport Chain Element"@en, "Transportkjedeelement"@no ;
-    rdfs:comment "An individual element (activity or hub) in a transport chain"@en .
+    rdfs:comment "An individual element (activity or hub) in a transport chain"@en ;
+    rdfs:comment "Et enkeltelement (aktivitet eller knutepunkt) i en transportkjede"@no .
 
 logistics:TransportLeg a rdfs:Class ;
     rdfs:label "Transport Leg"@en, "Transportetappe"@no ;
-    rdfs:comment "A single leg or segment of a multi-modal journey"@en .
+    rdfs:comment "A single leg or segment of a multi-modal journey"@en ;
+    rdfs:comment "En enkelt etappe eller delstrekning av en multimodal reise"@no .
 
 # ===================================================================
 # Hub Activity Class and Enumeration
@@ -443,7 +458,8 @@ logistics:TransportLeg a rdfs:Class ;
 
 logistics:HubActivity a rdfs:Class ;
     rdfs:label "Hub Activity"@en, "Navaktivitet"@no ;
-    rdfs:comment "An activity performed at a logistics hub or terminal"@en .
+    rdfs:comment "An activity performed at a logistics hub or terminal"@en ;
+    rdfs:comment "En aktivitet som utføres ved et logistikknutepunkt eller en terminal"@no .
 
 # Hub Activity Instances
 logistics:Transshipment a logistics:HubActivity ;
@@ -472,7 +488,8 @@ logistics:Handling a logistics:HubActivity ;
 
 logistics:VehicleType a rdfs:Class ;
     rdfs:label "Vehicle Type"@en, "Kjøretøytype"@no ;
-    rdfs:comment "Classification of road transport vehicles by size and capacity"@en .
+    rdfs:comment "Classification of road transport vehicles by size and capacity"@en ;
+    rdfs:comment "Klassifisering av kjøretøy for veitransport etter størrelse og kapasitet"@no .
 
 # Vehicle Type Instances
 logistics:LightDutyVehicle a logistics:VehicleType ;
@@ -497,7 +514,8 @@ logistics:ArticulatedTruck a logistics:VehicleType ;
 
 logistics:VesselType a rdfs:Class ;
     rdfs:label "Vessel Type"@en, "Fartøytype"@no ;
-    rdfs:comment "Classification of sea transport vessels by cargo type and capacity"@en .
+    rdfs:comment "Classification of sea transport vessels by cargo type and capacity"@en ;
+    rdfs:comment "Klassifisering av fartøy for sjøtransport etter lasttype og kapasitet"@no .
 
 # Vessel Type Instances
 logistics:ContainerShip a logistics:VesselType ;
